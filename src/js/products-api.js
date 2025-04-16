@@ -16,7 +16,10 @@ export async function fetchCategories() {
 
 export async function fetchAllProducts(page = 1) {
     try {
-        const data = await axios.get(`?limit=12&skip=${(page - 1) * 12}`).then((data) => { return data.data.products });
+        const data = await axios.get(`?limit=12&skip=${(page - 1) * 12}`).then((data) => {
+
+            return data.data
+        });
         console.log('fetchAllProducts', data);
         
            return data;
@@ -42,7 +45,7 @@ export async function fetchProductsById(id) {
 
 export async function fetchProductsByQuery(query) {
     try {
-        const data = await axios.get(`search?q=${query}`).then((data) => { return data.data.products });
+        const data = await axios.get(`search?q=${query}`).then((data) => { return data.data });
         console.log('fetchProductsByQuery', data);
         
            return data;
@@ -55,7 +58,7 @@ export async function fetchProductsByQuery(query) {
 
 export async function fetchProductsByCategory(category, page = 1) {
     try {
-        const data = await axios.get(`category/${category}?limit=12&skip=${(page - 1) * 12}`).then((data) => { return data.data.products });
+        const data = await axios.get(`category/${category}?limit=12&skip=${(page - 1) * 12}`).then((data) => { return data.data });
         console.log('fetchProductsByCategory', data);
         
            return data;
