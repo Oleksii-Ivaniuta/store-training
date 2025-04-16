@@ -1,10 +1,18 @@
-import"./assets/styles-BK7AYJoX.js";import{a}from"./assets/vendor-N5iQpiFS.js";a.defaults.baseURL="https://dummyjson.com/products";async function n(){try{const r=await a.get("/category-list").then(t=>t.data);return console.log("fetchCategories",r),r}catch(r){console.log(`fetch categories ${r}`)}}async function d(r=1){try{const t=await a.get(`?limit=12&skip=${(r-1)*12}`).then(c=>c.data.products);return console.log("fetchAllProducts",t),t}catch(t){console.log(`fetch all products ${t}`)}}const s={categories:document.querySelector(".categories"),products:document.querySelector(".products")};async function l(r){try{r.innerHTML="";const c=(await n()).map(o=>`<li class="categories__item">
- <button class="categories__btn" type="button">${o}</button>
-</li>`).join("");r.insertAdjacentHTML("beforeEnd",c)}catch(t){console.log(`render categories ${t}`)}}async function i(r,t){try{t.innerHTML="";const o=(await r).map(e=>`<li class="products__item" data-id="${e.id}">
-    <img class="products__image" src="${e.thumbnail}" alt="${e.title}"/>
-    <p class="products__title">${e.title}</p>
-    <p class="products__brand"><span class="products__brand--bold">Brand: ${e.brand}</span></p>
-    <p class="products__category">Category: ${e.category}</p>
-    <p class="products__price">Price: ${e.price}$</p>
- </li>`).join("");t.insertAdjacentHTML("beforeEnd",o)}catch(c){console.log(`render products ${c}`)}}l(s.categories);i(d(1),s.products);
+import"./assets/styles-BK7AYJoX.js";import{a as n}from"./assets/vendor-N5iQpiFS.js";const r={categories:document.querySelector(".categories"),products:document.querySelector(".products"),input:document.querySelector(".search-form__input"),form:document.querySelector(".search-form"),notFound:document.querySelector(".not-found"),modalProduct:document.querySelector(".modal-product"),modalWindow:document.querySelector(".modal")};function i(){r.products.innerHTML=""}function p(){r.modalWindow.classList.add("modal--is-open")}n.defaults.baseURL="https://dummyjson.com/products";async function g(){try{const o=await n.get("/category-list").then(t=>t.data);return console.log("fetchCategories",o),o}catch(o){console.log(`fetch categories ${o}`)}}async function m(o=1){try{const t=await n.get(`?limit=12&skip=${(o-1)*12}`).then(e=>e.data);return console.log("fetchAllProducts",t),t}catch(t){console.log(`fetch all products ${t}`)}}async function l(o){try{const t=await n.get(`${o}`).then(e=>e.data);return console.log("fetchProductsById",t),t}catch(t){console.log(`fetch products by id ${t}`)}}async function d(o){try{const t=await n.get(`search?q=${o}`).then(e=>e.data);return console.log("fetchProductsByQuery",t),t}catch(t){console.log(`fetch products by query ${t}`)}}async function y(o,t=1){try{const e=await n.get(`category/${o}?limit=12&skip=${(t-1)*12}`).then(c=>c.data);return console.log("fetchProductsByCategory",e),e}catch(e){console.log(`fetch products by category ${e}`)}}async function f(o){try{o.innerHTML="";const e=(await g()).map(c=>`<li class="categories__item">
+ <button class="categories__btn" type="button">${c}</button>
+</li>`).join("");o.insertAdjacentHTML("beforeEnd",e)}catch(t){console.log(`render categories ${t}`)}}async function s(o,t){try{t.innerHTML="";const c=(await o).products.map(a=>`<li class="products__item" data-id="${a.id}">
+    <img class="products__image" src="${a.thumbnail}" alt="${a.title}"/>
+    <p class="products__title">${a.title}</p>
+    <p class="products__brand"><span class="products__brand--bold">Brand: ${a.brand}</span></p>
+    <p class="products__category">Category: ${a.category}</p>
+    <p class="products__price">Price: ${a.price}$</p>
+ </li>`).join("");t.insertAdjacentHTML("beforeEnd",c)}catch(e){console.log(`render products ${e}`)}}async function h(o,t){try{o.innerHTML="";const e=await l(t),c=`<img class="modal-product__img" src="${e.thumbnail}" alt="${e.title}" />
+      <div class="modal-product__content">
+        <p class="modal-product__title">${e.title}</p>
+        <ul class="modal-product__tags">${e.tags}</ul>
+        <p class="modal-product__description">${e.description}</p>
+        <p class="modal-product__shipping-information">Shipping: ${e.shippingInformation}</p>
+        <p class="modal-product__return-policy">Return Policy: ${e.returnPolicy}</p>
+        <p class="modal-product__price">Price: ${e.price}$</p>
+      </div>`;o.insertAdjacentHTML("beforeEnd",c),p()}catch(e){console.log(`render products ${e}`)}}function _(o,t){localStorage.setItem(o,JSON.stringify(t))}function u(o){try{return JSON.parse(localStorage.getItem(o))}catch(t){console.log(`load from local storage ${t}`)}}function $(o){localStorage.removeItem(o)}function b(o){r.notFound.classList.remove("not-found--visible"),o.preventDefault();const t=r.input.value.trim();$("searchKey");try{d(t).then(e=>{e.products.length>0?s(d(t),r.products):(i(),r.notFound.classList.add("not-found--visible"))})}catch(e){console.log(`searchProducts ${e}`)}r.input.value=""}function P(){_("searchKey",r.input.value)}function L(o){o.target.classList.contains("categories__btn")&&s(y(o.target.textContent),r.products)}function S(o){const t=o.target.closest(".products__item");if(t&&r.products.contains(t)){const e=t.dataset.id;h(r.modalProduct,e)}else return}f(r.categories);s(m(1),r.products);r.input.value=u("searchKey")?u("searchKey"):"";r.input.addEventListener("input",P);r.form.addEventListener("submit",b);r.categories.addEventListener("click",L);l(2);r.products.addEventListener("click",S);
 //# sourceMappingURL=index.js.map
