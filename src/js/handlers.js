@@ -1,4 +1,5 @@
-import { clearProducts } from "./helpers";
+import { currentPage } from "./constants";
+import { clearProducts, removeLoadMoreBtn } from "./helpers";
 import { fetchProductsByCategory, fetchProductsByQuery } from "./products-api";
 import { refs } from "./refs";
 import { renderProductById, renderProducts } from "./render-function";
@@ -35,7 +36,7 @@ export function saveInputData() {
 
 export function loadCategory(event) {
     if (event.target.classList.contains('categories__btn')) {
-        renderProducts(fetchProductsByCategory(event.target.textContent), refs.products);
+        renderProducts(fetchProductsByCategory(currentPage, event.target.textContent), refs.products);
     }
 };
 

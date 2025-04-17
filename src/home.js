@@ -1,8 +1,8 @@
 import { loadCategory, loadProduct, saveInputData, searchProducts } from "./js/handlers";
-import { fetchAllProducts, fetchCategories, fetchProductsByCategory, fetchProductsById, fetchProductsByQuery } from "./js/products-api";
+import { fetchAllProducts, fetchProductsById, } from "./js/products-api";
 import { refs } from "./js/refs";
 import { renderCategories, renderProducts } from "./js/render-function";
-import { loadFromLocalStorage, removeFromLocalStorage } from "./js/storage";
+import { loadFromLocalStorage } from "./js/storage";
 
 //Логіка сторінки Home
 

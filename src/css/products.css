@@ -82,3 +82,30 @@
     color: #e05a00;
   }
 }
+
+.load-more-btn {
+  background: #ff6b0a;
+  color: white;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  justify-self: center;
+  gap: 0.8rem;
+  min-width: 200px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 24px;
+  margin-top: -24px;
+}
+
+.load-more-btn:hover {
+  background: #fa9654;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 107, 10, 0.1);
+}

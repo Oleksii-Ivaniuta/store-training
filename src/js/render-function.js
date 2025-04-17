@@ -1,7 +1,6 @@
 // Функцію для створення, рендеру або видалення розмітки
 import { modalOpen } from './modal';
 import { fetchCategories, fetchProductsById } from './products-api';
-import { refs } from './refs';
 
 export async function renderCategories(div) {
     try {
@@ -22,7 +21,7 @@ export async function renderCategories(div) {
 export async function renderProducts(apiFunction, div) {
     try {
         div.innerHTML = "";
-        const data = await apiFunction;
+      const data = await apiFunction;
         const markup = data.products.map((i) => { 
 return `<li class="products__item" data-id="${i.id}">
     <img class="products__image" src="${i.thumbnail}" alt="${i.title}"/>
@@ -32,7 +31,7 @@ return `<li class="products__item" data-id="${i.id}">
     <p class="products__price">Price: ${i.price}$</p>
  </li>`
         }).join("");
- div.insertAdjacentHTML("beforeEnd", markup);
+      div.insertAdjacentHTML("beforeEnd", markup);
     }
     catch(error) {
         console.log(`render products ${error}`);
@@ -60,3 +59,4 @@ export async function renderProductById(div, id) {
         console.log(`render products ${error}`);
     }
 }
+
