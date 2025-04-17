@@ -8,4 +8,5 @@ export const refs = {
     notFound: document.querySelector('.not-found'),
     modalProduct: document.querySelector('.modal-product'),
     modalWindow: document.querySelector('.modal'),
+    modalCloseBtn: document.querySelector('.modal__close-btn'),
 };

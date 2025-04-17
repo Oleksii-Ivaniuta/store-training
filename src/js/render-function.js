@@ -1,6 +1,5 @@
 // Функцію для створення, рендеру або видалення розмітки
-
-import { modalOpen } from './helpers';
+import { modalOpen } from './modal';
 import { fetchCategories, fetchProductsById } from './products-api';
 import { refs } from './refs';
 
