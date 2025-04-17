@@ -1,4 +1,5 @@
 // Функцію для створення, рендеру або видалення розмітки
+import { addLoadMoreBtn, removeLoadMoreBtn } from './helpers';
 import { modalOpen } from './modal';
 import { fetchCategories, fetchProductsById } from './products-api';
 
@@ -32,6 +33,13 @@ return `<li class="products__item" data-id="${i.id}">
  </li>`
         }).join("");
       div.insertAdjacentHTML("beforeEnd", markup);
+      if (data.total > 12 && !document.querySelector('.load-more-btn'))
+      {
+        addLoadMoreBtn();
+      }
+      else {
+        removeLoadMoreBtn();
+      }
     }
     catch(error) {
         console.log(`render products ${error}`);
@@ -60,3 +68,15 @@ export async function renderProductById(div, id) {
     }
 }
 
+export function renderMoreProducts(data, div) {
+const markup = data.products.map((i) => { 
+return `<li class="products__item" data-id="${i.id}">
+    <img class="products__image" src="${i.thumbnail}" alt="${i.title}"/>
+    <p class="products__title">${i.title}</p>
+    <p class="products__brand"><span class="products__brand--bold">Brand: ${i.brand}</span></p>
+    <p class="products__category">Category: ${i.category}</p>
+    <p class="products__price">Price: ${i.price}$</p>
+ </li>`
+        }).join("");
+      div.insertAdjacentHTML("beforeEnd", markup);
+}

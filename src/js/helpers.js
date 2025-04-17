@@ -1,4 +1,5 @@
 
+import { loadMoreProducts } from "./handlers";
 import { refs } from "./refs";
 
 //Допоміжні функції
