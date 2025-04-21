@@ -40,7 +40,7 @@ export async function fetchProductsById(id) {
   }
 }
 
-export async function fetchProductsByQuery(query) {
+export async function fetchProductsByQuery(query, page = storageKeys.page) {
   try {
     const data = await axios.get(`search?q=${query}`).then(data => {
       return data.data;

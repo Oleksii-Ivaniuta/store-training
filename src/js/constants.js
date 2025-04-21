@@ -1,3 +1,5 @@
+
+
 //Константи
 export const storageKeys = {
     page: 1,
@@ -14,5 +16,10 @@ export const storageKeys = {
     api: null,
     setApi(numberApi) {
         storageKeys.api = numberApi;
-    }
+    },
+    currentId: null,
+    setCurrentId(id) {
+        storageKeys.currentId = id;
+    },
 }
+

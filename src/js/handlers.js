@@ -13,18 +13,20 @@ import {
   renderProductById,
   renderProducts,
 } from './render-function';
-import { removeFromLocalStorage, saveToLocalStorage } from './storage';
+import { loadFromLocalStorage, removeFromLocalStorage, saveToLocalStorage } from './storage';
+import { wishList } from "../wishlist";
+import { cart } from "../cart";
 
 // Функції, які передаються колбеками в addEventListners
 export function searchProducts(event) {
   refs.notFound.classList.remove('not-found--visible');
-  event.preventDefault();
-  const query = refs.input.value.trim();
+    event.preventDefault();
+    const query = refs.input.value.trim();
   removeFromLocalStorage('searchKey');
   try {
     fetchProductsByQuery(query).then(data => {
       if (data.products.length > 0) {
-        renderProducts(fetchProductsByQuery(query), refs.products);
+      renderProducts(fetchProductsByQuery(query), refs.products);
       } else {
         clearProducts();
         refs.notFound.classList.add('not-found--visible');
@@ -33,7 +35,7 @@ export function searchProducts(event) {
   } catch (error) {
     console.log(`searchProducts ${error}`);
   }
-  refs.input.value = '';
+    refs.input.value = '';
 }
 
 export function saveInputData() {
@@ -95,3 +97,19 @@ export async function loadMoreProducts() {
     console.log(`load more ${error}`);
   }
 }
+
+
+export function addToWishlist() {
+  const id = storageKeys.currentId;
+  wishList.toggleWishlist(id);
+  refs.wishListCounter.textContent = `${(loadFromLocalStorage('wishlist')).length}`;
+}
+
+
+export function addToCart() {
+  const id = storageKeys.currentId;
+  cart.toggleCart(id);
+  refs.cartCounter.textContent = `${(loadFromLocalStorage('cart')).length}`;
+console.log(`add to cart, ${id}`)
+}
+
